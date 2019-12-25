@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 export const LogIn = () => {
     //const [user, setUser] = useState("")
     const [phone,setPhone] = useState("");
-    const [pass,setPass] = useState("");
+    const [password,setpassword] = useState("");
 
     const SubmitLogInForm = (event) => {
         clearError();
@@ -76,16 +76,16 @@ export const LogIn = () => {
             flag = 1;
         }
 
-        if (pass.length<8) {
+        if (password.length<8) {
             showError("Password must be more than 8 letters long",0,1);
             flag = 1;
         }
 
         if (flag === 0) {
-            async () => {
-                const user = {phone, pass}
+            // async () => {
+                const user = {phone, password}
 
-                const response = await fetch("/login", {
+                const response = fetch("/login", {
                     method: "POST",
                     headers: {
                         "Content_Type": "application/json"
@@ -98,7 +98,7 @@ export const LogIn = () => {
                 if (response.ok) {
                     console.log(response)
                 }
-            }
+            // }
         }
     
         // event.preventDefault();
@@ -121,7 +121,7 @@ export const LogIn = () => {
             onChange={e => (setPhone(e.target.value), clearError())}/>
           <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password"
             type="password" id="password" autoComplete="current-password" 
-            onChange={e => (setPass(e.target.value), clearError())}/>
+            onChange={e => (setpassword(e.target.value), clearError())}/>
           <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
           <p id="errorText" style={{transition:"1s" , height:"0px", color:"red",display:"flexbox", padding:"0 0 0 0", margin:"5px 0 0 0", textAlign:"center"}}></p>
           <Button onClick={SubmitLogInForm} fullWidth variant="contained" color="primary" 

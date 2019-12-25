@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "remove:www": "if exist www rd /s /q www"
   },
-  "proxy": "http://192.168.43.190:1227/",
+  "proxy": "https://you-made-it.herokuapp.com/",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {}
