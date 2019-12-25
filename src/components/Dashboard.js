@@ -9,7 +9,7 @@ import SignUp from "../images/SignUp.png"
 export const Dashboard = () => {
     return (
         <div>
-            <BottomNavigation showLabels style={{ backgroundColor: "gray", height: 90 }}>
+            <BottomNavigation style={{ backgroundColor: "gray", height: 90 }}>
                 
                     <BottomNavigationAction style={{ color: "white" }} label="Log in" icon={
                         <img style={{ height: "50px", width: "50px" }} src={LogIn}/>}
