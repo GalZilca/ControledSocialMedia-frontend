@@ -23,6 +23,7 @@
     "eject": "react-scripts eject",
     "remove:www": "if exist www rd /s /q www"
   },
+  "proxy": "http://192.168.43.190:1227/",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {}

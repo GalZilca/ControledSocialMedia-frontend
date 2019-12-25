@@ -64,19 +64,44 @@ const useStyles = makeStyles(theme => ({
   }));
 
 export const LogIn = () => {
-
+    //const [user, setUser] = useState("")
     const [phone,setPhone] = useState("");
     const [pass,setPass] = useState("");
 
     const SubmitLogInForm = (event) => {
         clearError();
-        if (phone.length!=10)
+        let flag = 0;
+        if (phone.length!=10) {
             showError("Phone must be 10 digits long",1,0);
+            flag = 1;
+        }
 
-        if (pass.length<8)
+        if (pass.length<8) {
             showError("Password must be more than 8 letters long",0,1);
+            flag = 1;
+        }
+
+        if (flag === 0) {
+            async () => {
+                const user = {phone, pass}
+
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content_Type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                }).catch(e => {
+                    console.log(e)
+                })
     
-        event.preventDefault();
+                if (response.ok) {
+                    console.log(response)
+                }
+            }
+        }
+    
+        // event.preventDefault();
     }
 
     let classes = useStyles();
