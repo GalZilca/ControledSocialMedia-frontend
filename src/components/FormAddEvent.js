@@ -1,10 +1,11 @@
 
+
 import React from "react"
 
-export const Event = () => {
+export const FormAddEvent = () => {
     return (
         <div>
-            <h1>Event</h1>
+            <h1>FormAddEvent</h1>
         </div>
     )
 }
