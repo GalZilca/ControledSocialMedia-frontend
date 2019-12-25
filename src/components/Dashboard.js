@@ -10,16 +10,17 @@ export const Dashboard = () => {
     return (
         <div>
             <BottomNavigation style={{ backgroundColor: "gray", height: 90 }}>
-                
-                    <BottomNavigationAction style={{ color: "white" }} label="Log in" icon={
+                <Link to="/logIn">
+                    <BottomNavigationAction style={{ color: "white", justifyContent: "right" }} label="Log in" icon={
                         <img style={{ height: "50px", width: "50px" }} src={LogIn}/>}
                     />
-                    <Link to="/logIn"/>
-                        
+                </Link>
+
+                <Link to="/signUp">     
                     <BottomNavigationAction style={{ color: "white" }} label="Sign Up" icon={
                         <img style={{ height: "50px", width: "50px" }} src={SignUp}/>}
                     />
-                    <Link to="/signUp"/>
+                </Link>
             </BottomNavigation>
             
             <Typography style={{ marginLeft: 80, marginTop: 60, display: "inline-block" }} variant="h3"
