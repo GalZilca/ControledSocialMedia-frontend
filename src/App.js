@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import ActionPage from "./components/ActionPage";
+import ChooseActionPage from "./components/ChooseActionPage";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <ActionPage />
+        <ChooseActionPage />
       </div>
     );
   }
