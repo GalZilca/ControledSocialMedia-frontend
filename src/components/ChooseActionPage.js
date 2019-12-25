@@ -1,25 +1,14 @@
 import React , {useState} from "react";
-import { Link } from 'react-router-dom';
-import facebook-like from '../images/facebook-like.png'
-//import {Container} from 
+import like from '../images/facebook-like.png'
+import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
 
 export const ChooseActionPage = () => {
     let page;
     let user = "nadav";
     let points = -1
 
-    page =<div>
-    <p>Hello {user}, you have {points}</p>
-    <table>
-        <tr>
-            <td></td>
-        </tr>
+    return (<Divider />
+        );
 
-
-    </table>
-
-
-    </div>
-
-    return page;
 }
