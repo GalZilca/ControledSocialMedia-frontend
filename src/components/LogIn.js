@@ -18,15 +18,16 @@ import Container from '@material-ui/core/Container';
 function showError(text,phoneBool,passBool) {
     let error = document.querySelector('#errorText');
     let phoneCom = document.querySelector('#phone');
-    console.log(phoneCom);
     let passCom = document.querySelector('#password');
     if (phoneBool)
         phoneCom.style.color = "red";
     if (passBool)
         passCom.style.color = "red";
-    let errorHeight = 15;
-    error.style.height = "15px";
-    if (error.innerHTML) {
+    
+    let errorHeight = error.style.height;
+    if (!errorHeight)
+        errorHeight = 15;
+    else {
         error.innerHTML += "</br>";
         errorHeight += 10;
     }
