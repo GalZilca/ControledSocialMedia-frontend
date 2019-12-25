@@ -1,7 +1,7 @@
 
 import React from "react"
 
-export const ActionPage = () => {
+export const Event = () => {
     return (
         <div>
             <h1>ActionPage</h1>
