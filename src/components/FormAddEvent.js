@@ -16,6 +16,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 
+import DatePicker from 'react-date-picker';
 
 const useStyles = makeStyles(theme => ({
     EventNameClass: {
@@ -24,6 +25,10 @@ const useStyles = makeStyles(theme => ({
     icon: {
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(2),
+    },
+    DatePicker: {
+        borderRadius: "5px",
+        border: "gray 1px solid",
     },
   }));
 
@@ -99,6 +104,13 @@ export const FormAddEvent = () => {
       }, [inputValue, fetch]);
 
 
+    const DatePickerChange = (e) => {
+        console.log(e);
+        this.value = e;
+    };
+
+    const [startDate,setStartDate] = useState("");
+    const [endDate,setEndDate] = useState("");
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -184,22 +196,34 @@ export const FormAddEvent = () => {
                     autoComplete="phone"
                     />
                 </Grid>
-                <Grid item xs="6">
-                    <TextField variant="outlined" fullWidth
-                    id="startingTime"
-                    label="Starting Time"
-                    name="startingTime"
-                    autoComplete="startingTime"
-                    />
+                <Grid container direction="row" xs="10" style={{marginLeft:"20px",fontSize:"24px"}}>
+                    <Grid container direction="column" xs="6">
+                        <Grid item>
+                            <Typography id="startingTime">
+                                Starting Date
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <DatePicker id='startDatePicker' className={classes.DatePicker}
+                             minDate={new Date()}  onChange={e => (setStartDate(e), setEndDate(e))}
+                            value={startDate}/>
+                        </Grid>
+                    </Grid>
+                    <Grid container direction="column" xs="6" >
+                        <Grid item>
+                            <Typography id="endingTime" >
+                            Ending Date
+                            </Typography>
+                        </Grid> 
+                        <Grid item>
+                            <DatePicker id='endDatePicker' className={classes.DatePicker}
+                             minDate={new Date()} onChange={e => setEndDate(e)}
+                             value={endDate}/>
+                        </Grid> 
+                    </Grid>
                 </Grid>
-                <Grid item xs="6">
-                    <TextField variant="outlined" fullWidth
-                    id="endingTime"
-                    label="Ending Time"
-                    name="endingTime"
-                    autoComplete="endingTime"
-                    />
-                </Grid>
+
+                
             </Grid>
         </Container>
     )
