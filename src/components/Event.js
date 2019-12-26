@@ -27,9 +27,9 @@ export const Event = () => {
     let eventStartTime;
     let eventEndDate;
     let eventEndTime;
-    
+
     const ConfirmArrival = () => {
-        geoloc = <Geo />;
+        
     };
 
     return (
@@ -76,7 +76,7 @@ export const Event = () => {
                 </Grid>
                 <Grid item xs="12">
                     <Button fullWidth variant="contained" color="secondary" style={{margin: "50px 0 0 20px" }}
-                        onClick={}>
+                        >
                     </Button>
                 </Grid>
                 
