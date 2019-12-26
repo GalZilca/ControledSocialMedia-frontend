@@ -45,9 +45,7 @@ export const ChooseActionPage = () => {
     axios.get("/get_all_events").then(res => {
         const data = res.data.all_events;
         setEvents(data);
-        console.log(data);
     })
-    console.log(events)
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
