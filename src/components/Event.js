@@ -12,6 +12,11 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { geolocated } from "react-geolocated";
+
+import Geo from './Geo.js';
+import axios from 'axios';
+
 export const Event = () => {
 
     let eventName;
@@ -23,13 +28,13 @@ export const Event = () => {
     let eventEndDate;
     let eventEndTime;
 
-
     const ConfirmArrival = () => {
-        // send location and check if ok
+        
     };
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
+        <Geo/>
             <Paper elevation={3} />
             <Typography variant="h3">
                 {eventName}
@@ -71,12 +76,12 @@ export const Event = () => {
                 </Grid>
                 <Grid item xs="12">
                     <Button fullWidth variant="contained" color="secondary" style={{margin: "50px 0 0 20px" }}
-                    onClick={ConfirmArrival} >
-                        Confirm Arrival
+                        >
                     </Button>
                 </Grid>
                 
             </Grid>
+            
         </Container>
     )
 }
