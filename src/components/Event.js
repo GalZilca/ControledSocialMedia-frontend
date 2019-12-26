@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Paper } from "@material-ui/core";
+import { Typography, Paper, Card, CardContent } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -29,59 +29,63 @@ export const Event = () => {
     let eventEndTime;
 
     const ConfirmArrival = () => {
-        
+        alert("You made it!")
     };
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
-        
-            <Paper elevation={3} />
-            <Typography variant="h3">
-                {eventName}
-            </Typography>
-            <Grid container spacing={2} style={{marginTop:"30px",height:"30px"}}>
-                <Grid item xs="8">
-                    <div style={{whiteSpace:"nowrap"}}>
-                        <Typography variant="h6">
-                        Event Name - 
-                        </Typography>
-                        <Typography variant="h4">
+            <Card>
+                <CardContent style={{ height: "440px" }}>
+                    <Paper elevation={3} />
+                    <Typography variant="h3">
                         {eventName}
-                        </Typography>
-                    </div>
-                    <Typography variant="h7">
-                    Location - {eventLocation}
                     </Typography>
-                </Grid>
+                    
+                    <Grid container spacing={2} style={{marginTop:"30px",height:"30px"}}>
+                        <Grid item xs="8">
+                            <div style={{whiteSpace:"nowrap"}}>
+                                <Typography variant="h6">
+                                Event Name - Brave Together
+                                </Typography>
+                                <Typography variant="h4">
+                                {eventName}
+                                </Typography>
+                            </div>
+                            <Typography variant="h7">
+                            Location - Shlomo HaLevi 5 {eventLocation}
+                            </Typography>
+                        </Grid>
 
-                <Grid item xs="4">
-                    <Typography variant="h5">
-                    Dates
-                    </Typography>
-                    <Typography variant="h6">
-                    {eventStartDate},{eventStartTime} - {eventEndDate},{eventEndTime}
-                    </Typography>
-                </Grid>
+                        <Grid item xs="4">
+                            <Typography variant="h5">
+                            Dates - 
+                            </Typography>
+                            <Typography variant="h6">
+                            {eventStartDate}{eventStartTime} 25.12.19 - 26.12.19 {eventEndDate}{eventEndTime}
+                            </Typography>
+                        </Grid>
 
-                <Grid item xs="12">
-                    <Typography variant="h4">
-                    About - {eventDesc}
-                    </Typography>
-                </Grid>
+                        <Grid style={{ marginTop: 40 }} item xs="12">
+                            <Typography variant="h4">
+                            About - Hackathon 2019 {eventDesc}
+                            </Typography>
+                        </Grid>
 
-                <Grid item xs="6">
-                <Typography variant="h6">
-                    Phone Number - {eventPhone}
-                    </Typography>
-                </Grid>
-                <Grid item xs="12">
-                    <Button fullWidth variant="contained" color="secondary" style={{margin: "50px 0 0 20px" }}>
-                    Confirm Location
-                    </Button>
-                </Grid>
-                
-            </Grid>
-            
+                        <Grid style={{ marginTop: 40 }} item xs="6">
+                        <Typography variant="h6">
+                            Phone Number - 052-3369580 {eventPhone}
+                            </Typography>
+                        </Grid>
+                        <Grid style={{ marginTop: 80 }} item xs="12">
+                            <Button fullWidth variant="contained" color="secondary"
+                                onClick={ConfirmArrival}>
+                            Confirm Location
+                            </Button>
+                        </Grid>
+                        
+                    </Grid>
+                </CardContent>
+            </Card>
         </Container>
     )
 }
