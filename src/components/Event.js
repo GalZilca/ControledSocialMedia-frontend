@@ -12,7 +12,12 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { geolocated } from "react-geolocated";
+
+import Geo from './Geo.js';
+
 export const Event = () => {
+
 
     let eventName;
     let eventDesc;
@@ -26,10 +31,15 @@ export const Event = () => {
 
     const ConfirmArrival = () => {
         // send location and check if ok
+        var dom = new Demo();
+        dom.render();
     };
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
+    
+        
+
             <Paper elevation={3} />
             <Typography variant="h3">
                 {eventName}
@@ -77,6 +87,45 @@ export const Event = () => {
                 </Grid>
                 
             </Grid>
+            
         </Container>
     )
+}
+
+
+class Demo extends React.Component {
+    render() {
+        return !this.props.isGeolocationAvailable ? (
+            <div>Your browser does not support Geolocation</div>
+        ) : !this.props.isGeolocationEnabled ? (
+            <div>Geolocation is not enabled</div>
+        ) : this.props.coords ? (
+            <table>
+                <tbody>
+                    <tr>
+                        <td>latitude</td>
+                        <td>{this.props.coords.latitude}</td>
+                    </tr>
+                    <tr>
+                        <td>longitude</td>
+                        <td>{this.props.coords.longitude}</td>
+                    </tr>
+                    <tr>
+                        <td>altitude</td>
+                        <td>{this.props.coords.altitude}</td>
+                    </tr>
+                    <tr>
+                        <td>heading</td>
+                        <td>{this.props.coords.heading}</td>
+                    </tr>
+                    <tr>
+                        <td>speed</td>
+                        <td>{this.props.coords.speed}</td>
+                    </tr>
+                </tbody>
+            </table>
+        ) : (
+            <div>Getting the location data&hellip; </div>
+        );
+    }
 }
