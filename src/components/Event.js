@@ -75,8 +75,8 @@ export const Event = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs="12">
-                    <Button fullWidth variant="contained" color="secondary" style={{margin: "50px 0 0 20px" }}
-                        >
+                    <Button fullWidth variant="contained" color="secondary" style={{margin: "50px 0 0 20px" }}>
+                    Confirm Location
                     </Button>
                 </Grid>
                 
