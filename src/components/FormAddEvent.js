@@ -23,19 +23,11 @@ import ReactDOM from 'react-dom';
 import 'rc-time-picker/assets/index.css';
 
 
-function showError(text,phoneBool,passBool,fnameBool) {
-    let error = document.querySelector('#errorText');
-    let phoneCom = document.querySelector('#eventName');
-    let passCom = document.querySelector('#password');
-    let fnameCom = document.querySelector('#firstName');
-    if (phoneBool)
-        phoneCom.style.color = "red";
-    if (passBool)
-        passCom.style.color = "red";
-    if (fnameBool)
-        fnameCom.style.color = "red";
+var errorHeight;
 
-    let errorHeight = error.style.height;
+function showError(text) {
+    let error = document.querySelector('#errorText');
+
     if (!errorHeight)
         errorHeight = 15;
     else {
@@ -48,10 +40,9 @@ function showError(text,phoneBool,passBool,fnameBool) {
 
 function clearError() {
     let error = document.querySelector('#errorText');
+    errorHeight = 0;
     error.style.height = "0px";
     error.innerHTML = "";
-    document.querySelector('#password').style.color = "black";
-    document.querySelector('#phone').style.color = "black";
 }
 
 
@@ -155,7 +146,48 @@ export const FormAddEvent = () => {
 
         if (eventName.length<=3) {
             showError("Event name must be more than 3 letters");
+            flag=1;
         }
+
+        if (!eventLocation) {
+            showError("You must pick an event location");
+            flag=1;
+        }
+
+        if (eventPhone.length!=10) {
+            showError("Phone must be 10 digits");
+            flag=1;
+        }
+
+        if (!startDate) {
+            showError("There must be a start date");
+            flag=1;
+        }
+
+        if (!endDate) {
+            showError("There must be a end date");
+            flag=1;
+        }
+
+        if (!startTime) { 
+            let s = new Date();
+            s.setHours(0);
+            s.setMinutes(0);
+            setStartTime(s);
+        }
+
+        if (!endTime) { 
+            let s = new Date();
+            s.setHours(23);
+            s.setMinutes(59);
+            setEndTime(s);
+        }
+
+        if (!flag)  {
+            // add new event on server
+        }
+
+
     };
 
     const [eventName,setEventName] = useState("");
@@ -213,6 +245,7 @@ export const FormAddEvent = () => {
                     renderInput={params => (
                         <TextField
                         {...params} required fullWidth
+                        id="eventLocation"
                         label="Event Location"
                         variant="outlined"
                         onChange={handleChange,e => setEventLocation(e.target.value)}
@@ -261,29 +294,29 @@ export const FormAddEvent = () => {
                     <Grid container direction="column" xs="6">
                         <Grid item>
                             <Typography id="startingTime">
-                                Starting Date
+                                Start Date
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <DatePicker id='startDatePicker' className={classes.DatePicker} required
+                            <DatePicker id='startDatePicker' className={classes.DatePicker}
                              minDate={new Date()}  onChange={e => (setStartDate(e), setEndDate(e))}
                             value={startDate}/>
                         </Grid>
-                        <TimePicker id='startTimePicker' placeholder="Strating Time" onChange={e => setStartTime(e)} showSecond={0} style={{width:"50%"}}/> 
+                        <TimePicker id='startTimePicker' placeholder="Start Time" onChange={e => setStartTime(e)} showSecond={0} style={{width:"50%"}}/> 
                     </Grid>
                     <Grid container direction="column" xs="6" >
                         <Grid item>
                             <Typography id="endingTime" >
-                            Ending Date
+                            End Date
                             </Typography>
                         </Grid> 
                         <Grid item>
-                            <DatePicker id='endDatePicker' className={classes.DatePicker} required
+                            <DatePicker id='endDatePicker' className={classes.DatePicker}
                              minDate={new Date()} onChange={e => setEndDate(e)}
                              value={endDate}/>
                              
                         </Grid>
-                        <TimePicker id='endTimePicker' placeholder="Ending Time" onChange={e => setEndTime(e)} showSecond={0} style={{width:"50%"}}/> 
+                        <TimePicker id='endTimePicker' placeholder="End Time" onChange={e => setEndTime(e)} showSecond={0} style={{width:"50%"}}/> 
                     </Grid>
                 </Grid>
                 <Grid item xs="12">
@@ -292,7 +325,7 @@ export const FormAddEvent = () => {
                 <Grid item xs="12">
                     <Button fullWidth variant="contained" color="primary" className={classes.submit}
                     onClick={SubmitAddEvent} >
-                        Sign Up
+                        Add Event
                     </Button>
                 </Grid>
                 
