@@ -22,6 +22,7 @@ import TimePicker from 'rc-time-picker';
 import ReactDOM from 'react-dom';
 import 'rc-time-picker/assets/index.css';
 
+import axios from "axios";
 
 var errorHeight;
 
@@ -184,7 +185,10 @@ export const FormAddEvent = () => {
         }
 
         if (!flag)  {
-            // add new event on server
+            axios.post("/creat_event", { eventName, eventLocation, eventPhone, startDate, endDate, startTime, endTime }).then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
         }
 
 

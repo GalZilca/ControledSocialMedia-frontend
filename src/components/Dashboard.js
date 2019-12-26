@@ -29,6 +29,9 @@ export const Dashboard = () => {
                             <img style={{ height: "50px", width: "50px" }} src={SignUp}/>}
                         />
                     </Link>
+                    <Link to="/formAddEvent">
+                        <p style={{ color: "white", justifyContent: "right" }}>add event</p>
+                    </Link>
                 </Grid>
             </Grid>
             
@@ -38,9 +41,9 @@ export const Dashboard = () => {
                 </Typography>
                 <img style={{ height: "72px", width: "72px", /*marginRight: 60*/ }} src={BraveTogether} alt="logo" />
             </Grid>
-            <Typography style={{ marginLeft: 60, marginTop: 20 }} variant="h5"
+            {/* <Typography style={{ marginLeft: 60, marginTop: 20 }} variant="h5"
                 >The Brave together ...
-            </Typography>
+            </Typography> */}
             <ChooseActionPage/>
         </Container>
     )
