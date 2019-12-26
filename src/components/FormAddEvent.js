@@ -18,6 +18,43 @@ import throttle from 'lodash/throttle';
 
 import DatePicker from 'react-date-picker';
 
+import TimePicker from 'rc-time-picker';
+import ReactDOM from 'react-dom';
+import 'rc-time-picker/assets/index.css';
+
+
+function showError(text,phoneBool,passBool,fnameBool) {
+    let error = document.querySelector('#errorText');
+    let phoneCom = document.querySelector('#eventName');
+    let passCom = document.querySelector('#password');
+    let fnameCom = document.querySelector('#firstName');
+    if (phoneBool)
+        phoneCom.style.color = "red";
+    if (passBool)
+        passCom.style.color = "red";
+    if (fnameBool)
+        fnameCom.style.color = "red";
+
+    let errorHeight = error.style.height;
+    if (!errorHeight)
+        errorHeight = 15;
+    else {
+        error.innerHTML += "</br>";
+        errorHeight += 10;
+    }
+    error.style.height = errorHeight+"px";
+    error.innerHTML += text;
+}
+
+function clearError() {
+    let error = document.querySelector('#errorText');
+    error.style.height = "0px";
+    error.innerHTML = "";
+    document.querySelector('#password').style.color = "black";
+    document.querySelector('#phone').style.color = "black";
+}
+
+
 const useStyles = makeStyles(theme => ({
     EventNameClass: {
       fontSize:"initial",
@@ -30,6 +67,9 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px",
         border: "gray 1px solid",
     },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+      },
   }));
 
   function loadScript(src, position, id) {
@@ -108,9 +148,29 @@ export const FormAddEvent = () => {
         console.log(e);
         this.value = e;
     };
+    
+    const SubmitAddEvent = () => {
+
+        let flag = 0;
+
+        if (eventName.length<=3) {
+            showError("Event name must be more than 3 letters");
+        }
+    };
+
+    const [eventName,setEventName] = useState("");
+
+    const [eventDesc,setEventDesc] = useState("");
+
+    const [eventLocation,setEventLocation] = useState("");
+
+    const [eventPhone,setEventPhone] = useState("");
 
     const [startDate,setStartDate] = useState("");
     const [endDate,setEndDate] = useState("");
+
+    const [startTime,setStartTime] = useState("");
+    const [endTime,setEndTime] = useState("");
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -125,7 +185,7 @@ export const FormAddEvent = () => {
                     name="eventName"
                     className={classes.EventNameClass}
                     style={{fontSize:"xl"}}
-                    //onChange={(e) => (setPhone(e.target.value), clearError())}
+                    onChange={e => setEventName(e.target.value)}
                     />
                 </Grid>
                 <Grid item xs="12">
@@ -133,6 +193,7 @@ export const FormAddEvent = () => {
                     id="eventDesc"
                     label="Event Description"
                     name="eventDesc"
+                    onChange={e => setEventDesc(e.target.value)}
                     />
                 </Grid>
 
@@ -151,11 +212,10 @@ export const FormAddEvent = () => {
                     disableOpenOnFocus
                     renderInput={params => (
                         <TextField
-                        {...params}
-                        label="Add a location"
+                        {...params} required fullWidth
+                        label="Event Location"
                         variant="outlined"
-                        fullWidth
-                        onChange={handleChange}
+                        onChange={handleChange,e => setEventLocation(e.target.value)}
                         />
                     )}
                     renderOption={option => {
@@ -190,10 +250,11 @@ export const FormAddEvent = () => {
 
                 <Grid item xs="6">
                     <TextField variant="outlined" fullWidth
-                    id="phone"
+                    id="phone" required
                     label="Phone Number"
                     name="phone"
                     autoComplete="phone"
+                    onChange={e => setEventPhone(e.target.value)}
                     />
                 </Grid>
                 <Grid container direction="row" xs="10" style={{marginLeft:"20px",fontSize:"24px"}}>
@@ -204,10 +265,11 @@ export const FormAddEvent = () => {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <DatePicker id='startDatePicker' className={classes.DatePicker}
+                            <DatePicker id='startDatePicker' className={classes.DatePicker} required
                              minDate={new Date()}  onChange={e => (setStartDate(e), setEndDate(e))}
                             value={startDate}/>
                         </Grid>
+                        <TimePicker id='startTimePicker' placeholder="Strating Time" onChange={e => setStartTime(e)} showSecond={0} style={{width:"50%"}}/> 
                     </Grid>
                     <Grid container direction="column" xs="6" >
                         <Grid item>
@@ -216,13 +278,23 @@ export const FormAddEvent = () => {
                             </Typography>
                         </Grid> 
                         <Grid item>
-                            <DatePicker id='endDatePicker' className={classes.DatePicker}
+                            <DatePicker id='endDatePicker' className={classes.DatePicker} required
                              minDate={new Date()} onChange={e => setEndDate(e)}
                              value={endDate}/>
-                        </Grid> 
+                             
+                        </Grid>
+                        <TimePicker id='endTimePicker' placeholder="Ending Time" onChange={e => setEndTime(e)} showSecond={0} style={{width:"50%"}}/> 
                     </Grid>
                 </Grid>
-
+                <Grid item xs="12">
+                <p id="errorText" style={{transition:"1s" , height:"0px", color:"red",display:"flexbox", padding:"0 0 0 0", margin:"5px 0 0 0", textAlign:"center"}}></p>
+                </Grid>
+                <Grid item xs="12">
+                    <Button fullWidth variant="contained" color="primary" className={classes.submit}
+                    onClick={SubmitAddEvent} >
+                        Sign Up
+                    </Button>
+                </Grid>
                 
             </Grid>
         </Container>
