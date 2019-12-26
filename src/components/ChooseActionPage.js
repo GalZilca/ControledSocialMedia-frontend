@@ -3,6 +3,8 @@ import { makeStyles, Grid, Card, CardMedia, CardContent, Typography } from "@mat
 import { Container } from "@material-ui/core"
 import { Link } from "react-router-dom";
 
+import axios from 'axios';
+
 const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: theme.spacing(2),
@@ -36,22 +38,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ChooseActionPage = () => {
-    const cards = [
-        {name: "Like", about: "do like"},
-        {name: "Share", about: "do Share"},
-        {name: "Attend", about: "do Attend"},
-        {name: "Manage", about: "do Manage"}
-    ]
-    const [events, setEvents] = useState(cards)
+    const [events, setEvents] = useState([]);
     const classes = useStyles();
     
-    // useEffect(() => {
-    //     fetch('/events').then(response =>
-    //         response.json().then(data => {
-    //         setEvents(data.events)
-    //       })
-    //     )
-    // }, [])
+
+    axios.get("/get_all_events").then(res => {
+        const data = res.data.all_events;
+        setEvents(data);
+        console.log(data);
+    })
+    console.log(events)
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">

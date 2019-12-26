@@ -3,27 +3,25 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Link } from 'react-router-dom';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import axios from 'axios';
 
-function showError(text,phoneBool,passBool,fnameBool) {
+function showError(text,phoneBool,passwordBool,nameBool) {
     let error = document.querySelector('#errorText');
     let phoneCom = document.querySelector('#phone');
-    let passCom = document.querySelector('#password');
-    let fnameCom = document.querySelector('#firstName');
+    let passwordCom = document.querySelector('#password');
+    let nameCom = document.querySelector('#firstName');
     if (phoneBool)
         phoneCom.style.color = "red";
-    if (passBool)
-        passCom.style.color = "red";
-    if (fnameBool)
-        fnameCom.style.color = "red";
+    if (passwordBool)
+        passwordCom.style.color = "red";
+    if (nameBool)
+        nameCom.style.color = "red";
 
     let errorHeight = error.style.height;
     if (!errorHeight)
@@ -68,24 +66,38 @@ const useStyles = makeStyles(theme => ({
 
 export const SignUp = () => {
 
-    const [phone,setPhone] = useState("");
-    const [pass,setPass] = useState("");
-    const [fname,setFname] = useState("");
+  const [phone,setPhone] = useState("");
+  const [password,setpassword] = useState("");
+  const [name,setname] = useState("");
 
 
-    const SubmitSignUpForm = (event) => {
-        clearError();
-        if (phone.length!=10)
-            showError("Phone must be 10 digits",1,0,0);
+  const SubmitSignUpForm = (event) => {
+      clearError();
+      let flag = 0;
+      if (phone.length!==10) {
+        showError("Phone must be 10 digits",1,0,0);
+        flag = 1;
+      }
 
-        if (pass.length<8)
-            showError("Password must be more than 8 letters",0,1,0);
+      if (password.length<8) {
+        showError("password must be more than 8 letters",0,1,0);
+        flag = 1;
+      }
 
-        if (fname.length<2)
-            showError("First name must be more than 2 letters",0,0,1);
-    
+      if (name.length<2) {
+        showError("First name must be more than 2 letters",0,0,1);
+        flag = 1;
+      }
+      
+      if (flag === 0) {
+        axios.post("/signup", { password, name, phone }).then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+      } else {
         event.preventDefault();
-    };
+      }
+  };
 
 
     const classes = useStyles();
@@ -103,11 +115,11 @@ export const SignUp = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField required fullWidth variant="outlined" autoFocus
-                autoComplete="fname"
+                autoComplete="name"
                 name="firstName"
                 id="firstName"
                 label="First Name"
-                onChange={(e) => (setFname(e.target.value), clearError())}
+                onChange={(e) => (setname(e.target.value), clearError())}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -130,11 +142,11 @@ export const SignUp = () => {
             <Grid item xs={12}>
               <TextField variant="outlined" required fullWidth
                 name="password"
-                label="Password"
+                label="password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => (setPass(e.target.value), clearError())}
+                onChange={(e) => (setpassword(e.target.value), clearError())}
               />
             </Grid>
           </Grid>

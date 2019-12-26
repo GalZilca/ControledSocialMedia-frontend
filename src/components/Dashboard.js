@@ -8,7 +8,7 @@ import LogIn from "../images/LogIn.png"
 import SignUp from "../images/SignUp.png"
 
 export const Dashboard = () => {
-    const [user, setUser] = useState({name: "guest", credits: "0"})
+    const [user, setUser] = useState({name: "guest", credits: "0", isManager: 0})
 
     return (
         <Container style={{ backgroundColor: "gray", height: 90 }}>
