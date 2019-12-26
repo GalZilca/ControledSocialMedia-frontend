@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, Grid, Card, CardMedia, CardContent, Typography } from "@material-ui/core"
 import { Container } from "@material-ui/core"
 import { Link } from "react-router-dom";
+import Brave2 from '../images/Brave.jpg';
 
 import axios from 'axios';
 
@@ -56,7 +57,9 @@ export const ChooseActionPage = () => {
                             state: event // your data array of objects
                         }}/>
                         <Card>
-                            <CardMedia className={classes.cardMedia} title="Image title"/>
+                            <CardMedia className={classes.cardMedia} title="Image title"
+                                image={Brave2}
+                            />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {event.name}
