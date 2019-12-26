@@ -36,6 +36,9 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
+    pointer: {
+        cursor: "pointer",
+    },
 }));
 
 export const ChooseActionPage = () => {
@@ -55,20 +58,21 @@ export const ChooseActionPage = () => {
                     <Grid item key={event} xs={12} sm={6} md={4}>
                         <Link to={{ pathname: "/Event",
                             state: event // your data array of objects
-                        }}/>
-                        <Card>
-                            <CardMedia className={classes.cardMedia} title="Image title"
-                                image={Brave2}
-                            />
-                            <CardContent className={classes.cardContent}>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {event.name}
-                                </Typography>
-                                <Typography>
-                                    {event.about}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        }}>
+                            <Card className={classes.pointer}>
+                                <CardMedia className={classes.cardMedia} title="Image title"
+                                    image={Brave2}
+                                />
+                                <CardContent className={classes.cardContent}>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {event.name}
+                                    </Typography>
+                                    <Typography>
+                                        {event.about}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Link>
                     </Grid>
                 ))}
             </Grid>

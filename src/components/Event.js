@@ -34,7 +34,7 @@ export const Event = () => {
 
     return (
         <Container component="main" maxWidth="md" style={{marginTop:"60px",display:"flex",flexDirection:"column",alignItems:"center"}}>
-        <Geo/>
+        
             <Paper elevation={3} />
             <Typography variant="h3">
                 {eventName}
