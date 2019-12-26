@@ -48,7 +48,7 @@ function clearError() {
 
 
 const useStyles = makeStyles(theme => ({
-    EventNameClass: {
+    nameClass: {
       fontSize:"initial",
     },
     icon: {
@@ -145,7 +145,7 @@ export const FormAddEvent = () => {
 
         let flag = 0;
 
-        if (eventName.length<=3) {
+        if (name.length<=3) {
             showError("Event name must be more than 3 letters");
             flag=1;
         }
@@ -155,7 +155,7 @@ export const FormAddEvent = () => {
             flag=1;
         }
 
-        if (eventPhone.length!=10) {
+        if (worker_phone.length!=10) {
             showError("Phone must be 10 digits");
             flag=1;
         }
@@ -184,23 +184,23 @@ export const FormAddEvent = () => {
             setEndTime(s);
         }
 
-        if (!flag)  {
-            axios.post("/creat_event", { eventName, eventLocation, eventPhone, startDate, endDate, startTime, endTime }).then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
-        }
+        // if (!flag)  {
+        //     axios.post("/creat_event", { name, eventLocation, worker_phone, startDate, endDate, startTime, endTime }).then(res => {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     })
+        // }
 
 
     };
 
-    const [eventName,setEventName] = useState("");
+    const [name,setname] = useState("");
 
     const [eventDesc,setEventDesc] = useState("");
 
     const [eventLocation,setEventLocation] = useState("");
 
-    const [eventPhone,setEventPhone] = useState("");
+    const [worker_phone,setworker_phone] = useState("");
 
     const [startDate,setStartDate] = useState("");
     const [endDate,setEndDate] = useState("");
@@ -214,14 +214,14 @@ export const FormAddEvent = () => {
                 Add Event
             </Typography>
             <Grid container spacing={2} style={{marginTop:"30px"}}>
-                <Grid item xs="5" className={classes.EventNameClass}>
+                <Grid item xs="5" className={classes.nameClass}>
                     <TextField variant="outlined" required fullWidth autoFocus
-                    id="eventName"
+                    id="name"
                     label="Event Name"
-                    name="eventName"
-                    className={classes.EventNameClass}
+                    name="name"
+                    className={classes.nameClass}
                     style={{fontSize:"xl"}}
-                    onChange={e => setEventName(e.target.value)}
+                    onChange={e => setname(e.target.value)}
                     />
                 </Grid>
                 <Grid item xs="12">
@@ -291,7 +291,7 @@ export const FormAddEvent = () => {
                     label="Phone Number"
                     name="phone"
                     autoComplete="phone"
-                    onChange={e => setEventPhone(e.target.value)}
+                    onChange={e => setworker_phone(e.target.value)}
                     />
                 </Grid>
                 <Grid container direction="row" xs="10" style={{marginLeft:"20px",fontSize:"24px"}}>
