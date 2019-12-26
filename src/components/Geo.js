@@ -1,11 +1,14 @@
 
 import React from "react";
 import { geolocated } from "react-geolocated";
+import axios from 'axios';
 
 
 class Demo extends React.Component {
-    render() {
-        return !this.props.isGeolocationAvailable ? (
+
+    render() {     
+
+        let f = !this.props.isGeolocationAvailable ? (
             <div>Your browser does not support Geolocation</div>
         ) : !this.props.isGeolocationEnabled ? (
             <div>Geolocation is not enabled</div>
@@ -37,6 +40,23 @@ class Demo extends React.Component {
         ) : (
             <div>Getting the location data&hellip; </div>
         );
+
+        if (this.props.isGeolocationAvailable)
+            if (this.props.isGeolocationEnabled)
+                if (this.props.coords){
+                    let location_x = this.props.coords.latitude;
+                    let location_y = this.props.coords.longitude;
+                    let event_id = "5432654635";
+
+                    console.log(location_x);
+                    console.log(location_y);
+
+                    axios.post("/verify_location", { location_x, location_y,event_id}).then(res => {
+                        console.log(res);
+                        console.log(res.data);
+                    });
+                }       
+      return f;
     }
 }
 
@@ -44,5 +64,5 @@ export default geolocated({
     positionOptions: {
         enableHighAccuracy: false,
     },
-    userDecisionTimeout: 5000,
+    userDecisionTimeout: 6000,
 })(Demo);
