@@ -11,15 +11,15 @@ export const Dashboard = () => {
     const [user, setUser] = useState({name: "guest", credits: "0", isManager: 0})
 
     return (
-        <Container style={{ backgroundColor: "gray", height: 90 }}>
+        <Container style={{ backgroundColor: "#33B7FF", height: 90 }}>
             <Grid style={{ height: 90, flexWrap: "inherit" }} container direction="row" justify="space-around" alignItems="stretch">
-                <p style={{ width: 450, color: "white", marginTop: 31.5 }}>
+                <p style={{ width: 450, marginTop: 31.5 }}>
                     Hello {user.name}, currently you have {user.credits} credits.
                 </p>
 
                 <Grid style={{ height: 90, flexWrap: "inherit" }} container direction="row" justify="flex-end" alignItems="stretch">
                     <Link to="/logIn">
-                        <BottomNavigationAction style={{ color: "white", justifyContent: "right" }} label="Log in" icon={
+                        <BottomNavigationAction style={{ justifyContent: "right" }} label="Log in" icon={
                             <img style={{ height: "50px", width: "50px" }} src={LogIn}/>}
                         />
                     </Link>
@@ -30,7 +30,7 @@ export const Dashboard = () => {
                         />
                     </Link>
                     <Link to="/formAddEvent">
-                        <p style={{ color: "white", justifyContent: "right" }}>add event</p>
+                        <p style={{ justifyContent: "right" }}>add event</p>
                     </Link>
                 </Grid>
             </Grid>
