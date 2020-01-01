@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Typography, Paper, Card, CardContent } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -28,8 +28,17 @@ export const Event = () => {
     let eventEndDate;
     let eventEndTime;
 
-    const ConfirmArrival = () => {
-        alert("You made it!")
+    const [askingLocation,setAskingLocaiton] = useState(false);
+
+    const ConfirmLocation = (GeoLock) => {
+
+        alert("You made it! x = "+GeoLock.location_x+ " , y = "+GeoLock.location_y);
+        GeoLock.event_id = "1234";
+        console.log(GeoLock);
+    /*  axios.post("/verify_location", { GeoLock.location_x, GeoLock.location_y, GeoLock.event_id}).then(res => {
+                console.log(res);
+                console.log(res.data); 
+        }); */
     };
 
     return (
@@ -78,11 +87,13 @@ export const Event = () => {
                         </Grid>
                         <Grid style={{ marginTop: 80 }} item xs="12">
                             <Button fullWidth variant="contained" color="secondary"
-                                onClick={ConfirmArrival}>
+                                onClick={()=>{setAskingLocaiton(1)}}>
                             Confirm Location
                             </Button>
                         </Grid>
-                        
+                        <Grid style={{ marginTop: 80 }} item xs="12">
+                            {askingLocation && <Geo onGetLocation={(GeoLock) => {ConfirmLocation(GeoLock)}}/>}
+                        </Grid>
                     </Grid>
                 </CardContent>
             </Card>
