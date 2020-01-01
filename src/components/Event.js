@@ -28,7 +28,7 @@ export const Event = () => {
     let eventEndDate;
     let eventEndTime;
 
-    const [askingLocation,setAskingLocaiton] = useState(false);
+    const [askingLocation,setAskingLocation] = useState(false);
 
     const ConfirmLocation = (GeoLock) => {
 
@@ -87,7 +87,7 @@ export const Event = () => {
                         </Grid>
                         <Grid style={{ marginTop: 80 }} item xs="12">
                             <Button fullWidth variant="contained" color="secondary"
-                                onClick={()=>{setAskingLocaiton(1)}}>
+                                onClick={()=>{setAskingLocation(1)}}>
                             Confirm Location
                             </Button>
                         </Grid>
