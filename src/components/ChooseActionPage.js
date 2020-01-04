@@ -50,15 +50,13 @@ export const ChooseActionPage = () => {
         const data = res.data.all_events;
         setEvents(data);
     })
-
+    console.log(events)
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
                 {events.map(event => (
                     <Grid item key={event} xs={12} sm={6} md={4}>
-                        <Link to={{ pathname: "/Event",
-                            state: event // your data array of objects
-                        }}>
+                        <Link to={{pathname: "/Event", state:{event}}}>
                             <Card className={classes.pointer}>
                                 <CardMedia className={classes.cardMedia} title="Image title"
                                     image={Brave2}
